@@ -1,0 +1,19 @@
+# Table of contents
+
+* [树莓派使用笔记](README.md)
+* [网线直连树莓派](wang-xian-zhi-lian-shu-mei-pai.md)
+* [树莓派安装记录](shu-mei-pai-an-zhuang-ji-lu.md)
+* [获取树莓派 当前cpu工作温度](huo-qu-shu-mei-pai-dang-qian-cpu-gong-zuo-wen-du.md)
+* [解决中文乱码](jie-jue-zhong-wen-luan-ma.md)
+* [初始化一块全新硬盘 \(初始化分区和挂载以及自动挂载\)](chu-shi-hua-yi-kuai-quan-xin-ying-pan-chu-shi-hua-fen-qu-he-gua-zai-yi-ji-zi-dong-gua-zai.md)
+* [安装 samba 文件共享服务 \(可以当成NAS来用\)](an-zhuang-samba-wen-jian-gong-xiang-fu-wu.md)
+* [安装SQL](an-zhuang-sql.md)
+* [树莓派开AP \(变路由器\)](shu-mei-pai-kai-ap-bian-lu-you-qi.md)
+* [apache2 网页文件服务器](apache2-wang-ye-wen-jian-fu-wu-qi.md)
+* [硬盘测速工具 hdparm](ying-pan-ce-su-gong-ju-hdparm.md)
+* [开启root账户远程和本地登陆](kai-qi-root-zhang-hu-yuan-cheng-he-ben-di-deng-lu.md)
+* [RPM 系统软件包](rpm-xi-tong-ruan-jian-bao.md)
+* [apt-get 和 aptitude](aptget-he-aptitude.md)
+* [Linux查看系统信息的一些命令及查看已安装软件包的命令](linux-cha-kan-xi-tong-xin-xi-de-yi-xie-ming-ling-ji-cha-kan-yi-an-zhuang-ruan-jian-bao-de-ming-ling.md)
+* [树莓派备份- 失败了一次不确定有效性](shu-mei-pai-bei-fen-shi-bai-le-yi-ci-bu-que-ding-you-xiao-xing.md)
+

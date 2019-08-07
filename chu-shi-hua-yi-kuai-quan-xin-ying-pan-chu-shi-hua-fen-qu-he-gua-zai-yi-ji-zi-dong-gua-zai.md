@@ -1,0 +1,86 @@
+# 初始化一块全新硬盘 \(初始化分区和挂载以及自动挂载\)
+
+## 硬盘初始化和分区
+
+```bash
+#可以先查看以下目前的硬盘数量和格式情况信息,以便于后面的对比.
+    $sudo fdisk -l    
+    
+#再将新的硬盘连接到USB(未分区和初始化)
+
+#然后使用如下命令查看是否多出现了新插入的硬盘信息.
+    $sudo fdisk -l 
+        # 进行和上面两条命令的对比, 你会找到一个新出现的信息 ,会指示设备名 /dev/sda1 之类的
+
+#进行修改格式化硬盘
+    $sudo fdisk /dev/sad1     #注意  这后面的 sda1 应该根据实际情况来进行修改
+  #执行完毕之后,会进入一个 Commmand (m for help):  标头的命令行模式, 在这个模式下进行输入
+      ->Commmand (m for help):  d
+          #这里输入了一个d  表示删除一个分区, 当然如果想清空某个盘需要挨个删除.
+      ->Commmand (m for help):  n
+          #接下来我又输入了一个n 表示我要创建一个新分区
+      ->Partition number (1-128, default 1):    这里回车就好
+      ->First sector (34 - 234441614 , default 65535):  也是会车
+      ->Last sector, +/-sectors or +/-size{K,M,G,T,P}(xxxx-xxx): 还是回车
+          #这里会有段提示信息, 就不写了
+      ->Do you want to remove the signature? [Y]se/[N]o:  y
+          #这里询问真的要进行初始化吗?  也是最后一步可回滚的操作.
+          #当输入y后 还有段提示信息, The sigature will be removed by a write command.
+      ->Commmand (m for help):  w
+          #这里输入w  表示保存更改 退出,  硬盘初始化也就完成了. 
+
+# 初始化完成之后, 来建立文件系统, 只有建立了文件系统才能进行使用
+    $sudo mkfs -t ext4 /dev/sda1
+        #我为这块盘建立的是 ext4 的文件系统, 也可以完成别的, EFT, FAT32 之类的
+
+#查看以下是否真的初始化完成了,还是需要上面的命令, 或者直接进行挂载,然后进入挂载目录随便建个文件.
+    $sudo fdisk -l
+```
+
+## 挂载硬盘
+
+```bash
+# 首先查看为挂载硬盘的设备名
+    $sudo fdisk -l
+        #仔细寻找未挂载的设备, 一般都会在最下面出现,然后记住设备名 比如 /dev/sda1
+
+# 然后进行挂载
+    $sudo mkdir /mnt/NewMkdir        #这里新建个文件夹, 如果不是这个目录则进行更换.
+    $sudo mount /dev/sad1  /mnt/NewMkdir
+        #将新设备 sad1 挂载到 mnt目录下 (当然还是建议新建个文件夹再挂载进去).
+```
+
+## 设置开机自动挂载
+
+```bash
+!!!注意, 当修改完自动挂载后,那么每次开机都不可以缺少任何一个自动挂载的设备,否则会无法启动系统
+!!!如果移除了未取消自动挂载的设备之后,进行了重启, 那么可以进入恢复模式,将 /etc/fstab 新添加的内容删除掉.
+
+# 建议先将 vim 的配置文件 ~/.vimrc 屏蔽掉,然后再使用vim 来进行修改这个 /etc/fstab 文件
+#首先挂载想要进行自动挂载的设备
+    $sudo mount /dev/sad1   /mnt/NewMkdir
+        #可以通过过 $sudo fdisk -l 来寻找设备名, 
+            #我这里就默认是 sad1, 默认有/mnt/NewMkdir 文件夹, 文件系统默认是 ext4
+
+#然后编辑文件 /etc/fstab   
+    $sudo vim /etc/fstab
+        #这个文件记录了开机自动挂载的设备
+
+#文件内容如下
+#-----------------------------------------------------------------------------
+proc                  /proc           proc    defaults          0       0
+PARTUUID=7143e657-01  /boot           vfat    defaults          0       2
+PARTUUID=7143e657-02  /               ext4    defaults,noatime  0       1
+# a swapfile is not a swap partition, no line here
+#   use  dphys-swapfile swap[on|off]  for that
+#-----------------------------------------------------------------------------
+    上面的空行全部都是 tab ,而不是空格,也不可以出现空格. 根据上面的规则来编写新添加的内容
+
+#插入的内容如下 (全部空行都是 tab )
+/dev/sda1    /mnt/NewMkdir    ext4    defaults    1    1
+
+#插入完成后保存退出就可以了,  下次他会自动挂载的 (只要没写错)
+```
+
+
+
