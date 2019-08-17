@@ -18,7 +18,7 @@
 
 格式化磁盘命令:  diskutil eraseDisk ExFAT StarkyDisk disk3  
     后面的参数可以用: diskutil list     来查询.
-        格式化完成后需要卸载分区   diskutil unmount disk3s1=
+        格式化完成后需要卸载分区   diskutil unmount disk3s1
 
 #打开磁盘工具  (disk utility)
     #在左侧找到 sd卡 然后选中他.( 选中顶层的磁盘 而不要选择箭头下的二层的磁盘)
