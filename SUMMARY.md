@@ -12,6 +12,7 @@
 * [apache2 网页文件服务器](apache2-wang-ye-wen-jian-fu-wu-qi.md)
 * [硬盘测速工具 hdparm](ying-pan-ce-su-gong-ju-hdparm.md)
 * [开启root账户远程和本地登陆](kai-qi-root-zhang-hu-yuan-cheng-he-ben-di-deng-lu.md)
+* [使用以太网接口进行 PPPOE拨号上网](shi-yong-yi-tai-wang-jie-kou-jin-hang-pppoe-bo-hao-shang-wang.md)
 * [RPM 系统软件包](rpm-xi-tong-ruan-jian-bao.md)
 * [apt-get 和 aptitude](aptget-he-aptitude.md)
 * [Linux查看系统信息的一些命令及查看已安装软件包的命令](linux-cha-kan-xi-tong-xin-xi-de-yi-xie-ming-ling-ji-cha-kan-yi-an-zhuang-ruan-jian-bao-de-ming-ling.md)

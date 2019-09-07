@@ -1,15 +1,42 @@
 # apache2 网页文件服务器
 
+## 安装网页文件服务器
+
+```bash
+sudo apt-get update
+
+sudo apt-get install apache2
+```
+
 ## apache2.conf 配置文件
 
 ```bash
-#在这个文件末尾添加下面的配置代码
+#在这个文件末尾添加下面的配置代码, 可以添加多个端口,每个端口对应一个目录.
+#但要是 ports.conf 在这个文件内添加打开的端口
 
-<Directory /home/pi>                        #需要分享的目录
-        Options Indexes FollowSymLinks      #
-        AllowOverride None                  #
-        Require all granted                 #权限
+#需要分享的目录
+<Directory /home/pi>                        
+        Options Indexes FollowSymLinks
+        AllowOverride None
+        
+        #权限
+        Require all granted 
 </Directory>
+
+# 后面参数是端口号, 可以任意修改,每个端口可以对应一个文件目录
+<VirtualHost *:80>              
+
+# 文档根,相当于分享的目录
+	DocumentRoot "/home/pi"  
+</VirtualHost>
+
+
+# 后面参数是端口号, 可以任意修改,每个端口可以对应一个文件目录
+<VirtualHost *:9999>              
+
+# 文档根,相当于分享的目录
+	DocumentRoot "/home/pi/note"  
+</VirtualHost>
 ```
 
 ## ports.conf  端口配置文件
@@ -18,7 +45,7 @@
 Listen 80                #这个是默认存在的
 Listen 9999              #这个是后添加的,表示开启9999端口的访问,监听
 
-<IfModule /home/pi>      #上面设置过的目录位置
+<IfModule /home/pi/note>      #上面设置过的目录位置
         Listen 9999      #可以访问的端口
 </IfModule>
 

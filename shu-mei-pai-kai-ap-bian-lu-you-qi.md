@@ -12,23 +12,61 @@ $apt-get install util-linux procps hostapd iproute2 iw haveged dnsmasq
 $git clone https://github.com/oblique/create_ap
 $cd create_ap
 $make install -dm 775
+#执行完这些命令后,会后很多错误之类的, 直接无视就好了.因为是没有影响.
 
 
-#创建WiFi热点（GitHub上有多种方式创建，可以查找自己需要的那种）
+#创建 WiFi热点（GitHub上有多种方式创建，可以查找自己需要的那种）SSID 和 passwd
 sudo create_ap wlan0 eth0 热点名 密码
 
-#开机启动
-将sudo create_ap wlan0 eth0 热点名 密码 添加到/etc/rc.local当中，即可开机启动
+#创建 5G WiFI热点  (3B+)
+sudo create_ap --ieee80211n --ht_capab '[HT40+]' --freq-band 5  wlan0 eth0  热点名 密码
 
+#开机启动, 将下面的命令添加到 /etc/rc.local 当中，即可开机启动
+sudo create_ap --ieee80211n --ht_capab '[HT40+]' --freq-band 5  wlan0 eth0  热点名 密码
 
-关闭无线AP 开机启动服务
+#如果还是无法开机启动,那么可以尝试下面的命令组合.
+sudo systemctl daemon-reload
+sudo systemctl enable create_ap.service
+sudo systemctl start create_ap.service
+
+#关闭无线AP 开机启动服务
 sudo systemctl stop create_ap.service
-开启无线AP 开机启动服务
+#开启无线AP 开机启动服务
 sudo systemctl start create_ap.service
 
 
-原文：https://blog.csdn.net/Leo_Luo1/article/details/78811294 
+#配置文件目录, 在里面修改热点名和密码还有5G接入点, 以及默认IP 地址池
+sudo  vim /etc/create_ap.conf 
 
+#配置文件,尽量这样写
+CHANNEL=default
+GATEWAY=192.168.1.1
+WPA_VERSION=2
+ETC_HOSTS=0
+DHCP_DNS=gateway
+NO_DNS=0
+NO_DNSMASQ=0
+HIDDEN=0
+MAC_FILTER=0
+MAC_FILTER_ACCEPT=/etc/hostapd/hostapd.accept
+ISOLATE_CLIENTS=0
+SHARE_METHOD=nat
+IEEE80211N=1
+IEEE80211AC=0
+HT_CAPAB=[HT40+]
+VHT_CAPAB=
+DRIVER=nl80211
+NO_VIRT=0
+COUNTRY=
+FREQ_BAND=5
+NEW_MACADDR=
+DAEMONIZE=0
+NO_HAVEGED=0
+WIFI_IFACE=wlan0
+INTERNET_IFACE=eth0
+SSID=aaaa1111
+PASSPHRASE=aaaa1111
+USE_PSK=0
 ```
 
 
