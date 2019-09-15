@@ -21,10 +21,19 @@ sudo create_ap wlan0 eth0 热点名 密码
 #创建 5G WiFI热点  (3B+)
 sudo create_ap --ieee80211n --ht_capab '[HT40+]' --freq-band 5  wlan0 eth0  热点名 密码
 
+
+开机启动的方法很多, 但是只能使用一种. ( 直接使用 systemctl 命令作为妥当 )
+  首先使用写入 rc.local 文件来进行开机启动, 随后进行重启.
+        如果不成功( 就是没有 wlan0 这个网口或wifi), 再进行更换.
+  下面就是systemctl 命令来进行
+
 #开机启动, 将下面的命令添加到 /etc/rc.local 当中，即可开机启动
 sudo create_ap --ieee80211n --ht_capab '[HT40+]' --freq-band 5  wlan0 eth0  热点名 密码
 
 #如果还是无法开机启动,那么可以尝试下面的命令组合.
+   首先将在下载到本地的 create_ap 目录中的 create_ap.service  拷贝到 /lib/systemd/system/ 中
+           sudo cp  create_ap/create_ap.service   /lib/systemd/system/
+   随后执行下面命令
 sudo systemctl daemon-reload
 sudo systemctl enable create_ap.service
 sudo systemctl start create_ap.service
