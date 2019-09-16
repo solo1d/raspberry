@@ -8,6 +8,13 @@ sudo apt-get update
 sudo apt-get install apache2
 ```
 
+## 检查配置文件是否修改正确的命令
+
+```bash
+$sudo apache2ctl configtest
+    可以通过这条命令来得知,配置文件 apache2.conf 是否被正确的修改了,以及是否出现错误.
+```
+
 ## apache2.conf 配置文件
 
 ```bash
