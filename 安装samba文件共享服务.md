@@ -3,9 +3,9 @@
 ## 安装 samba 文件共享服务
 
 ```bash
-1.树莓派安装samba
+1.树莓派安装samba (有可能还需要加上 sid-used 前缀)
 sudo apt-get update
-sudo apt-get install samba sam*
+sudo apt-get install samba
 
 
 2.设置一个公共目录 (也可以是某个硬盘挂载目录)
@@ -31,8 +31,7 @@ directory mask = 0771  #默认创建目录的权限
 
 
 3.重启samba服务
-sudo /etc/init.d/samba restart
-
+sudo systemctl restart smbd.service
 
 4.添加默认用户pi到samba
 sudo smbpasswd -a pi

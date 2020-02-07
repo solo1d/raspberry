@@ -89,13 +89,13 @@ save-session-interval=60
 ```
 
 {% hint style="info" %}
-注意：设置好配置，还要创建该会话空白文件 touch /home/pi/.config/aria2/aria2.session 
+注意：设置好配置，还要创建该会话空白文件 `touch /home/pi/.config/aria2/aria2.session` 
 
-测试下aria2是否启动成功 aria2c --conf-path=/home/pi/.config/aria2/aria2.config 
+测试下aria2是否启动成功 `aria2c --conf-path=/home/pi/.config/aria2/aria2.config` 
 
-用 ps aux\|grep aria2 看是否有进程启动，若有说明启动成功了。
+用 `ps aux\|grep aria2` 看是否有进程启动，若有说明启动成功了。
 
- 附：强制结束进程kill -9 3140（相应pid）
+ 附：强制结束进程`kill -9 3140`（相应pid）
 {% endhint %}
 
 ```bash
@@ -171,11 +171,15 @@ WantedBy=multi-user.target
 ```
 
 {% hint style="info" %}
-重新载入服务，并设置开机启动 sudo systemctl daemon-reload sudo systemctl enable aria 
+重新载入服务，并设置开机启动
 
-查看aria服务状态 sudo systemctl status aria 
+ `sudo systemctl daemon-reload`
 
-启动，停止，重启aria服务 sudo systemctl（start、stop、restart） aria 
+`sudo systemctl enable aria`
+
+查看aria服务状态 `sudo systemctl status aria`
+
+启动，停止，重启aria服务 `sudo systemctl（start、stop、restart） aria` 
 {% endhint %}
 
 ## 3.aria2的web管理界面（apache2）
@@ -189,17 +193,17 @@ WantedBy=multi-user.target
 {% hint style="info" %}
 下载aira-ng
 
-wget [https://github.com/mayswind/AriaNg/releases/download/0.4.0/aria-ng-0.4.0.zip](https://github.com/mayswind/AriaNg/releases/download/0.4.0/aria-ng-0.4.0.zip) -O aira-ng.zip
+`wget https://github.com/mayswind/AriaNg/releases/download/1.1.4/AriaNg-1.1.4.zip -O aira-ng.zip`
 
 解压
 
-unzip aira-ng.zip -d aira-ng
+`unzip aira-ng.zip -d aira-ng`
 
 将aira-ng放到nginx的/var/www/html/目录下，然后设置开机启动apache2
 
-sudo mv aira-ng /var/www/html/ 
+`sudo mv aira-ng /var/www/html/` 
 
-sudo systemctl enable apache2
+`sudo systemctl enable apache2`
 {% endhint %}
 
 > 用浏览器访问树莓派IP下的aira-ng，即：`http://192.168.1.115/aira-ng`  
