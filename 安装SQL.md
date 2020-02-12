@@ -18,8 +18,7 @@ $ sudo mysql -u root
 
 #设置root密码.
 use mysql;
-update user set plugin='mysql_native_password' where user='root';
-UPDATE user SET password=PASSWORD('你自己的密码') WHERE user='root';
+SET  PASSWORD FOR 'root'@'%' = PASSWORD('密码');
 flush privileges;
 
 #设置账号可以远程登录
@@ -29,19 +28,15 @@ flush privileges;
 exit;
 #然后进行下面的步骤,完成后就可以使用其他客户端直接连接了
 
-#开启mysql远程访问
-$ sudo vim /etc/mysql/mariadb.conf.d/50-server.cnf
-#找到文件中的 bind-address 并且这行注释掉,然后重启
 
 #重启mysql服务,让其刷新配置.
-$ sudo /etc/init.d/mysql restart
-
+$sudo systemctl restart  mysqld
 
 关闭mysql 开机启动服务
-sudo systemctl stop mysqld
+$sudo systemctl stop mysqld
 
 开启mysql 开机启动服务
-sudo systemctl start mysqld
+$sudo systemctl start mysqld
 
 ```
 

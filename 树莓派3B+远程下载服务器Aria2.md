@@ -2,13 +2,13 @@
 
 ## 1.安装aria2
 
-{% hint style="info" %}
- 附：aira2官方仓库:[https://github.com/aria2/aria2/](https://github.com/aria2/aria2/) 
 
-附：静态编译ARM树莓派:[ https://github.com/q3aql/aria2-static-builds/releases/download/v1.32.0/aria2-1.32.0-linux-gnu-arm-rbpi-build1.tar.bz2 ](https://github.com/q3aql/aria2-static-builds/releases/download/v1.34.0/aria2-1.34.0-linux-gnu-arm-rbpi-build1.tar.bz2)
-{% endhint %}
 
-{% file src=".gitbook/assets/aria2-1.34.0-linux-gnu-arm-rbpi-build1.tar.bz2" caption="static\_静态编译版aria2.tar.bz2" %}
+>  附：aira2官方仓库:[https://github.com/aria2/aria2/](https://github.com/aria2/aria2/) 
+
+> 附：静态编译ARM树莓派:[ https://github.com/q3aql/aria2-static-builds/releases/download/v1.32.0/aria2-1.32.0-linux-gnu-arm-rbpi-build1.tar.bz2 ](https://github.com/q3aql/aria2-static-builds/releases/download/v1.34.0/aria2-1.34.0-linux-gnu-arm-rbpi-build1.tar.bz2)
+
+> file src=[静态编译版](.gitbook/assets/aria2-1.34.0-linux-gnu-arm-rbpi-build1.tar.bz2)
 
 ### 教程使用的是直接安装软件源： 
 
@@ -16,14 +16,13 @@
 $sudo apt install -y aria2 
 ```
 
-{% hint style="info" %}
-首先:
 
-创建文件夹`mkdir -p ~/.config/aria2/`  
-添加一个aria配置文件`vim ~/.config/aria2/aria2.config`
 
-aria2.config  将要写入的内容如下:  \(要不把中文备注写入配置文件.\)
-{% endhint %}
+- 首先:
+  - 创建文件夹`mkdir -p ~/.config/aria2/`  
+  - 然后 添加一个aria配置文件`vim ~/.config/aria2/aria2.config`
+    - aria2.config  将要写入的内容如下:  \(要不把中文备注写入配置文件.\)
+      
 
 ```bash
 #后台运行
@@ -88,15 +87,16 @@ input-file=/home/pi/.config/aria2/aria2.session
 save-session-interval=60
 ```
 
-{% hint style="info" %}
-注意：设置好配置，还要创建该会话空白文件 `touch /home/pi/.config/aria2/aria2.session` 
 
-测试下aria2是否启动成功 `aria2c --conf-path=/home/pi/.config/aria2/aria2.config` 
 
-用 `ps aux\|grep aria2` 看是否有进程启动，若有说明启动成功了。
+> 注意 ：设置好配置，还要创建该会话空白文件 `touch /home/pi/.config/aria2/aria2.session` 
 
- 附：强制结束进程`kill -9 3140`（相应pid）
-{% endhint %}
+>  测试下aria2是否启动成功 `aria2c --conf-path=/home/pi/.config/aria2/aria2.config` 
+
+>  用 `ps aux | grep aria2` 看是否有进程启动，若有说明启动成功了。
+
+>  附：强制结束进程`kill -9 3140`（相应pid）
+> 
 
 ```bash
 目前正在使用的配置文件内容:
@@ -149,12 +149,13 @@ bt-tracker= udp://tracker.coppersurfer.tk:6969/announce
 
 ## 2.设置aria2服务和开机启动
 
-{% hint style="info" %}
-我们用的Raspbian系统是使用systemd来管理服务的，会和最初init.d有一些差别。  
-我们创建并编辑aria.service文件  
-`sudo vim /lib/systemd/system/aria.service`  
-并输入以下内容：
-{% endhint %}
+
+
+> 我们 用的Raspbian系统是使用systemd来管理服务的，会和最初init.d有一些差别。  
+> 我们创建并编辑aria.service文件  
+> `sudo vim /lib/systemd/system/aria.service`  
+> 并输入以下内容：
+>
 
 ```bash
 [Unit]
@@ -170,7 +171,7 @@ ExecStart=/usr/bin/aria2c --conf-path=/home/pi/.config/aria2/aria2.config
 WantedBy=multi-user.target
 ```
 
-{% hint style="info" %}
+
 重新载入服务，并设置开机启动
 
  `sudo systemctl daemon-reload`
@@ -180,7 +181,7 @@ WantedBy=multi-user.target
 查看aria服务状态 `sudo systemctl status aria`
 
 启动，停止，重启aria服务 `sudo systemctl（start、stop、restart） aria` 
-{% endhint %}
+
 
 ## 3.aria2的web管理界面（apache2）
 
@@ -188,9 +189,7 @@ WantedBy=multi-user.target
 
 首先根据下面配置好apache2 文件服务器, \(实际什么都不用配置, 只是知道配置文件如何修改就好\)
 
-{% page-ref page="apache2-wang-ye-wen-jian-fu-wu-qi.md" %}
 
-{% hint style="info" %}
 下载aira-ng
 
 `wget https://github.com/mayswind/AriaNg/releases/download/1.1.4/AriaNg-1.1.4.zip -O aira-ng.zip`
@@ -204,20 +203,20 @@ WantedBy=multi-user.target
 `sudo mv aira-ng /var/www/html/` 
 
 `sudo systemctl enable apache2`
-{% endhint %}
 
 > 用浏览器访问树莓派IP下的aira-ng，即：`http://192.168.1.115/aira-ng`  
 > 然后在`系统设置`点击`AriaNg设置` –&gt; `全局` –&gt; 设置语言为中文 –&gt; 点击`RPC`–&gt;修改为 rpc 密钥：`secret`
 
-![&#x8FD9;&#x91CC;&#x5199;&#x56FE;&#x7247;&#x63CF;&#x8FF0;](https://img-blog.csdn.net/20180522124219719?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2t4d2lueHA=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![70](assets/70.png)
 
 > 然后就可以添加下载任务了
 
 ## 4.下载速度慢问题
 
-{% hint style="info" %}
-很多伙伴会发现，使用aria2没有迅雷下载快，甚至下不动，这是因为迅雷有自己的服务器，而Aria2没有加速服务器，有些种子一直没几个人上传导致只有几KB的速度甚至完全没速度，这种情况下该怎么办呢？ 给Aria2添加Tracker，让Aria2不只是从DHT网络或者种子文件中存储的Tracker信息，从而找到更多的下载源。 这里建议添加trackers\_best \(20 trackers\)，最优的20条。 链接：[https://github.com/ngosang/trackerslist](https://github.com/ngosang/trackerslist) 
-{% endhint %}
+
+
+> 很多伙伴会发现，使用aria2没有迅雷下载快，甚至下不动，这是因为迅雷有自己的服务器，而Aria2没有加速服务器，有些种子一直没几个人上传导致只有几KB的速度甚至完全没速度，这种情况下该怎么办呢？ 给Aria2添加Tracker，让Aria2不只是从DHT网络或者种子文件中存储的Tracker信息，从而找到更多的下载源。 这里建议添加trackers\_best \(20 trackers\)，最优的20条。 链接：[https://github.com/ngosang/trackerslist](https://github.com/ngosang/trackerslist) 
+> 
 
 ```bash
 # 进入aira2配置
