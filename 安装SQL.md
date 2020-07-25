@@ -18,7 +18,7 @@ $ sudo mysql -u root
 
 #设置root密码.
 use mysql;
-SET  PASSWORD FOR 'root'@'%' = PASSWORD('密码');
+UPDATE user SET Password=password('新密码')  WHERE   User = 'root';
 flush privileges;
 
 #设置账号可以远程登录
