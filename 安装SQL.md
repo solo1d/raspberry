@@ -9,34 +9,36 @@
 步骤
 安装 mysql server
 
-$ sudo apt-get install mysql-server
-$ sudo sid-used  apt  install mysql-server
+$ sudo  sid-used apt install mysql-server  mysql-client   -y
 
 我以为中间会让我提示输入 数据库root的密码，没想到一帆风顺，直接完成，我要疯了，密码到底是什么了。
-    通过搜索发现，可以使用如下命令，空密码登录
+  通过搜索发现，可以使用如下命令，空密码登录
 $ sudo mysql -u root
 
 #设置root密码.
 use mysql;
-UPDATE user SET Password=password('新密码')  WHERE   User = 'root';
+update user set host='%' where user ='root';  #更新域属性，'%'表示允许外部访问
+ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY "新密码";
 flush privileges;
 
 #设置账号可以远程登录
 use mysql;
-GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'root账号密码' WITH GRANT OPTION;
+update user set host='%' where user ='root';  #更新域属性，'%'表示允许外部访问
+FLUSH PRIVILEGES;
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'WITH GRANT OPTION;
 flush privileges;
 exit;
 #然后进行下面的步骤,完成后就可以使用其他客户端直接连接了
 
 
 #重启mysql服务,让其刷新配置.
-$sudo systemctl restart  mysqld
+$sudo systemctl restart  mysql.service 
 
 关闭mysql 开机启动服务
-$sudo systemctl stop mysqld
+$sudo systemctl stop mysql
 
 开启mysql 开机启动服务
-$sudo systemctl start mysqld
+$sudo systemctl start mysql
 
 ```
 
