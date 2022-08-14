@@ -1,0 +1,18 @@
+# interfaces(5) file used by ifup(8) and ifdown(8)
+# Include files from /etc/network/interfaces.d:
+source-directory /etc/network/interfaces.d
+## Used dhcp ip address set eth0 inet to dhcp,
+## or used static ip address set eth0 to static
+## and change other ip settings.
+## If you wanna let settings to take effect,
+## uncomment symbol in front.
+
+auto eth0
+allow-hotplug eth0
+
+#iface eth0 inet dhcp
+iface eth0 inet static
+address 50.7.21.225
+netmask 255.255.255.0
+gateway 50.7.21.254
+#dns-nameservers 8.8.8.8

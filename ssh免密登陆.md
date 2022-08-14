@@ -65,7 +65,7 @@ $chmod  644 config
 
 ```bash
 $mkdir  ~/.ssh  ; cp  authorized_keys ~/.ssh/
-$chmod 700 ~/.ssh ;chmod 644 ~/.ssh/authorized_keys; chown pi:sudo ~/.ssh/authorized_keys
+$chmod 755 ~/.ssh ;chmod 600 ~/.ssh/authorized_keys; chown pi:sudo ~/.ssh/authorized_keys
 ```
 
 

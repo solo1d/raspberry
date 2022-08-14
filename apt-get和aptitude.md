@@ -42,6 +42,11 @@ sudo apt-get clean && sudo apt-get autoclean # --------清理下载文件的存�
 sudo apt-get check #-------检查是否有损坏的依赖
 
 
+Ubuntu使用apt安装本地deb软件包
+
+sudo apt install -y ./teamviewer_amd64.deb
+sudo apt-get install -y ./teamviewer_amd64.deb
+这里要注意的是不要直接在 apt 命令后指定deb包的名字，必须有路径信息，否则 apt 命令会尝试从远程仓库中搜索deb包同名的package，从而导致安装失败。
 
 apt-get update——在修改/etc/apt/sources.list或者/etc/apt/preferences之后运行该命令。此外您需要定期运行这一命令以确保您的软件包列表是最新的。 
 apt-get install packagename——安装一个新软件包（参见下文的aptitude） 
