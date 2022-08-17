@@ -17,7 +17,7 @@ sudo chown -R pi:pi ~/Note            #这里我默认用户是 pi,组也是 pi
 打开配置文件
 sudo vim /etc/samba/smb.conf
 默认的配置是每个用户可以读写自己的 home 目录，在“[homes]”节中，
-把 “read only = yes” 改为 “read only = no”。     #把只读关闭掉
+把 “read_only = yes” 改为 “read_only = no”。     #把只读关闭掉
 
 在文件最后添加：
 [pi]                   #共享出去之后的名称,也就是其他人看到的盘名字

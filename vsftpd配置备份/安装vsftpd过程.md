@@ -1,7 +1,7 @@
 #### 安装 vsftpd
 
 ```bash
-sudo apt-get install vsftpd vim db-util
+sudo apt-get install vsftpd db-util
 ```
 
 
@@ -33,6 +33,8 @@ xferlog_enable=YES
 #
 # Make sure PORT transfer connections originate from port 20 (ftp-data).
 connect_from_port_20=YES
+
+#添加如下选项
 allow_writeable_chroot=YES
 
 

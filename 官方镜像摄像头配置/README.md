@@ -67,7 +67,7 @@ framerate 10  #每秒从相机拍摄的最大帧数，每秒从相机捕获的�
 
 target_dir /root/motion  #设置拍摄图片的存储目录
 threshold 3000           #这个是改变探测灵敏度,越小越灵敏，这里设为3000像素值
-stream_loacalhost off   # 让外网可以访问。
+stream_localhost off   # 让外网可以访问。
 webcontrol_port  1081   # 为基于浏览器的http（使用浏览器的html）遥控器设置端口号
 
 threshold 1500          #摄像头物体敏感度， 有物体移动就会进行拍摄和生成文件， 可以增加该值以提高灵敏度。

@@ -8,7 +8,7 @@ source-directory /etc/network/interfaces.d
 ## uncomment symbol in front.
 
 auto eth0
-allow-hotplug eth0
+#allow-hotplug eth0
 
 #iface eth0 inet dhcp
 iface eth0 inet static

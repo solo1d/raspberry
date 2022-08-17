@@ -18,6 +18,8 @@ $sudo apache2ctl configtest
 ## apache2.conf 配置文件
 
 ```bash
+sudo vim /etc/apache2/apache2.conf
+
 #在这个文件末尾添加下面的配置代码, 可以添加多个端口,每个端口对应一个目录.
 #但要是 ports.conf 在这个文件内添加打开的端口
 
@@ -49,6 +51,9 @@ $sudo apache2ctl configtest
 ## ports.conf  端口配置文件
 
 ```bash
+sudo vim /etc/apache2/ports.conf
+
+
 Listen 80                #这个是默认存在的
 Listen 9999              #这个是后添加的,表示开启9999端口的访问,监听
 
@@ -69,7 +74,14 @@ Listen 9999              #这个是后添加的,表示开启9999端口的访问,
 </IfModule>
 ```
 
+## 重启服务
 
+```bash
+$sudo apache2ctl configtest
+    可以通过这条命令来得知,配置文件 apache2.conf 是否被正确的修改了,以及是否出现错误.
+
+$sudo systemctl restart apache2
+```
 
 
 
