@@ -1,0 +1,82 @@
+Raspberry Pi OS 64 位（Raspbian）
+树莓派官方深度定制的硬件驱动与软件程序，官方推荐系统。如果你第一次使用树莓派，请下载这个。
+
+这个版本是 64 位的系统，仅适用于树莓派 3B 3B+ 3A+ 4B Pi 400 CM3 CM3+ CM4 Zero 2 W
+
+64 位 Lite 版（无桌面） | 64 位桌面版（推荐使用） | 64 位桌面版（含常用软件）
+默认帐号：Username: pi Password: raspberry
+
+
+
+
+一、WiFi 网络配置
+
+用户可以在未启动树莓派的状态下单独修改 /boot/wpa_supplicant.conf 文件配置 WiFi 的 SSID 和密码，这样树莓派启动后会自行读取 wpa_supplicant.conf 配置文件连接 WiFi 设备。
+
+操作方法简单：将刷好 Raspbian 系统的 SD 卡用电脑读取。在 boot 分区，也就是树莓派的 /boot 目录下新建 wpa_supplicant.conf 文件，按照下面的参考格式填入内容并保存 wpa_supplicant.conf 文件。
+
+
+country=CN
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+ 
+network={
+ssid="WiFi-A"
+psk="12345678"
+key_mgmt=WPA-PSK
+priority=1
+}
+ 
+network={
+ssid="WiFi-B"
+psk="12345678"
+key_mgmt=WPA-PSK
+priority=2
+scan_ssid=1
+}
+
+
+
+
+说明以及不同安全性的 WiFi 配置示例：
+#ssid:网络的ssid
+#psk:密码
+#priority:连接优先级，数字越大优先级越高（不可以是负数）
+#scan_ssid:连接隐藏WiFi时需要指定该值为1
+
+如果你的 WiFi 没有密码
+
+network={
+ssid="你的无线网络名称（ssid）"
+key_mgmt=NONE
+}
+
+
+如果你的 WiFi 使用WEP加密
+
+network={
+ssid="你的无线网络名称（ssid）"
+key_mgmt=NONE
+wep_key0="你的wifi密码"
+}
+
+
+如果你的 WiFi 使用WPA/WPA2加密
+
+network={
+ssid="你的无线网络名称（ssid）"
+key_mgmt=WPA-PSK
+psk="你的wifi密码"
+}
+
+
+如果你不清楚 WiFi 的加密模式，可以在安卓手机上用 root explorer 打开 /data/misc/wifi/wpa/wpa_supplicant.conf，查看 WiFi 的信息。
+
+二、开启 SSH 服务
+
+如果通过 ssh 连接树莓派出现 Access denied 这个提示则说明 ssh 服务没有开启。要手动开启的话，和 WiFi 配置相似，同样在 boot 分区新建一个文件，空白的即可，文件命名为 ssh。注意要小写且不要有任何扩展名。
+树莓派在启动之后会在检测到这个文件之后自动启用 ssh 服务。随后即可通过登录路由器找到树莓派的 IP 地址，通过 ssh 连接到树莓派了。（有关开启 SSH 服务的详细方法）
+
+如果需要远程桌面方式操作树莓派，可以通过 ssh 安装 xrdp，再用 Windows 的远程桌面客户端连接到树莓派。
+
+这个小技巧对于没有有线网卡、没有标准 USB 接口来直连键鼠，但集成了 WiFi 的树莓派 Zero W 尤其实用。

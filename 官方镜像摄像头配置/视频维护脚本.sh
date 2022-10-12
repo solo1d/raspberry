@@ -14,16 +14,12 @@ OLD_DATE=`date -d-1day +%Y%m%d`
 NEW_DATE=`date  +%Y%m%d`
 BACKFILE_NAME="VIDEO_${OLD_DATE}-${NEW_DATE}.tar.gz"
 
-echo ${VIDEO_DIR}
-echo ${BACKUP_DIR}
-echo ${OLD_DATE}
-echo ${NEW_DATE}
 
 #rm -fr /home/pi/video/*
 
 cd ${VIDEO_DIR} || exit
 
-tar -czvf ${BACKFILE_NAME}  ./*
+tar -czvf ${BACKFILE_NAME}  ${VIDEO_DIR}
 mv  ${BACKFILE_NAME} ${BACKUP_DIR}
 chmod 774 ${BACKUP_DIR}/${BACKFILE_NAME}
 
