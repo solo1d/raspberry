@@ -1,0 +1,3 @@
+
+01 06 * * * sh /home/pi/cronteb/mkdir_data.sh
+#10,20,30,40,50,01 * * * * sh /home/pi/runPing.sh
