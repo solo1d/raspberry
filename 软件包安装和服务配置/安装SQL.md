@@ -9,7 +9,14 @@
 步骤
 安装 mysql server
 
-$ sudo  sid-used apt install mysql-server  mysql-client   -y
+# 社区下载网页
+# https://dev.mysql.com/downloads/file/?id=519241
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.25-1_all.deb
+
+sudo dpkg -i ./mysql-apt-config_0.8.25-1_all.deb 
+sudo apt-get update
+sudo apt-get install mysql-server mysql-sclient
+
 
 我以为中间会让我提示输入 数据库root的密码，没想到一帆风顺，直接完成，我要疯了，密码到底是什么了。
   通过搜索发现，可以使用如下命令，空密码登录

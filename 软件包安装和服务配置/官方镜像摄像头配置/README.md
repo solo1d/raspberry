@@ -1,4 +1,4 @@
-### 更新日期20220814_官方最新64位系统2022-04-04-raspios-bullseye-arm64_64-lite
+### 更新日期20230503_官方最新64位系统2023-05-03-raspios-bullseye-arm64_64-lite
 
 
 
@@ -11,8 +11,8 @@
 sudo raspi-config 
 
 在新的界面进行选择。
-	选择 4. Interfacing Options 
-			再选择 Camera  使摄像头开始服务。
+	选择  3 Interface Options
+			再选择  I1 Legacy Camera  使摄像头开始服务。
 ```
 
 
@@ -20,11 +20,12 @@ sudo raspi-config
 ## 下载所需要环境和库
 
 ```bash
-bash <(curl https://sumju.net/motioneye.sh)
-sudo apt-get install ffmpeg v4l-utils 
-sudo apt-get install libmariadbclient18 libpq5 
-sudo apt-get install python-pip python-dev libssl-dev 
-sudo apt-get install motion
+sudo apt-get install -y python2.7 python3-pip
+sudo bash <(curl https://sumju.net/motioneye.sh)
+sudo apt-get install -y ffmpeg v4l-utils
+sudo apt-get install -y libmariadbclient18 libpq5 
+sudo apt-get install -y python-pip python-dev libssl-dev 
+sudo apt-get install -y motion
 ```
 
 ```bash
