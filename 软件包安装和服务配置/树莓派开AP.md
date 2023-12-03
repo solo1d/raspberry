@@ -5,7 +5,7 @@
   另外一种是直接使用git上一个开源的包。我是使用第二种，一试就成功了非常好用。
 
 #安装依赖的库
-$apt-get install util-linux procps hostapd iproute2 iw haveged dnsmasq iptables
+$ sudo apt-get install util-linux procps hostapd iproute2 iw haveged dnsmasq iptables
 
 
 #将代码copy到本地，安装
