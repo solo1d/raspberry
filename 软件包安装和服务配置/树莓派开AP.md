@@ -80,3 +80,17 @@ USE_PSK=0
 
 
 
+
+
+## 使用create_ap开启热点，关闭后，无法连接wifi的解决方案
+
+使用sudo rfkill list all发现wifi没有被锁住，使用 sudo service network-manager start也无法解决问题
+
+后来使用create_ap -h查看此软件的相关帮助，其中有
+
+--fix-unmanaged If NetworkManager shows your interface as unmanaged after you
+close create_ap, then use this option to switch your interface
+back to managed
+
+然后使用  `sudo create_ap --fix-unmanaged` ，解决了此问题
+
