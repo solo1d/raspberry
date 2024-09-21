@@ -77,13 +77,14 @@ $ sudo systemctl enable mysql.service
 # 修改密码
 $ mysql -u root -p 
 # 取出临时密码进行登录  gtI.xj#wE9MP
-# 修改密码
-mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
-# 刷新下权限
-mysql> FLUSH PRIVILEGES;
 # 开启远程访问
+mysql> use mysql;
 mysql> update user set host='%' where user='root';
 mysql> commit;
+mysql> FLUSH PRIVILEGES;
+# 修改密码
+mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '12345678';
+# 刷新下权限
 mysql> FLUSH PRIVILEGES;
 ```
 
