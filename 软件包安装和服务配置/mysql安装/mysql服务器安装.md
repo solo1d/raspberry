@@ -47,6 +47,10 @@ $ su - root
 
 # root模式下命令  , 如果不成功，可以手动添加
 $ echo "export PATH=$PATH:/usr/local/mysql/bin" >> /etc/profile
+
+#创建mysql用户
+$ sudo useradd mysql
+$ sudo usermod mysql -s /usr/sbin/nologin 
 ```
 
 
@@ -60,12 +64,11 @@ $ echo "export PATH=$PATH:/usr/local/mysql/bin" >> /etc/profile
 ```bash
 $ sudo apt update 
 
-$ sudo apt install libaio-dev  libncurses6
+$ sudo apt install -y libaio-dev  libncurses6
 
 # 初始化数据库
 $ cd /usr/local/mysql/bin 
-$ sudo ./mysqld --user=mysql  --basedir=/usr/local/mysql \
-	--datadir=/usr/local/mysql/data --initialize
+$ sudo ./mysqld --user=mysql  --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --initialize
 		#后续输出的内容会有个密码，需要记录   
 			#password is generated for root@localhost: gtI.xj#wE9MP   最后这个就是密码
 
@@ -77,14 +80,17 @@ $ sudo systemctl enable mysql.service
 # 修改密码
 $ mysql -u root -p 
 # 取出临时密码进行登录  gtI.xj#wE9MP
+
+# 修改密码 (下面两条语句，那个能通过就用那个)
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '12345678';
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '12345678';
+# 刷新下权限
+mysql> FLUSH PRIVILEGES;
+
 # 开启远程访问
 mysql> use mysql;
 mysql> update user set host='%' where user='root';
 mysql> commit;
-mysql> FLUSH PRIVILEGES;
-# 修改密码
-mysql> ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '12345678';
-# 刷新下权限
 mysql> FLUSH PRIVILEGES;
 ```
 
